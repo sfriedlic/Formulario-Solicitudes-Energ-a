@@ -52,6 +52,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ ok: true, messageId: info.messageId });
   } catch (error) {
-    return res.status(500).json({ ok: false, error: error?.message || 'Error enviando correo' });
+    const raw = error?.message || 'Error enviando correo';
+    const msg = /535-5\.7\.8|BadCredentials|Username and Password not accepted/i.test(raw)
+      ? 'Autenticación rechazada por Gmail. En Vercel debes usar SMTP_USER=energiapatio@gmail.com y en SMTP_PASS una Contraseña de aplicación de Google de 16 dígitos, no la clave normal de la cuenta.'
+      : raw;
+    return res.status(500).json({ ok: false, error: msg });
   }
 }

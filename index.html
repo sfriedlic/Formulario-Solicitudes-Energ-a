@@ -40,6 +40,11 @@
     input::placeholder, textarea::placeholder { color:#6f86a8; }
     input:focus, select:focus, textarea:focus { border-color:#4c7bd9; box-shadow:0 0 0 3px rgba(76,123,217,.16); }
     textarea { min-height:128px; resize:vertical; }
+
+    .date-wrap { position:relative; }
+    .date-wrap input { padding-right:54px; }
+    .date-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); padding:8px 10px; min-width:auto; border-radius:10px; background:#182544; color:#e5eefc; border:1px solid #29406a; }
+    input[type="date"] { color-scheme: dark; }
     .help { color:#7f92b2; font-size:12px; margin-top:7px; }
     .btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
     button {
@@ -140,7 +145,7 @@
             </div>
             <div>
               <label for="fecha">Fecha requerida</label>
-              <input id="fecha" type="date" />
+              <div class="date-wrap"><input id="fecha" type="date" lang="es-CL" /><button type="button" class="date-btn" id="abrir-fecha" aria-label="Abrir calendario">📅</button></div>
             </div>
           </div>
 
@@ -227,6 +232,7 @@
       prioridad: $("prioridad"),
       fecha: $("fecha"),
       comentario: $("comentario"),
+      abrirFecha: $("abrir-fecha"),
       enviar: $("enviar"),
       limpiar: $("limpiar"),
       status: $("status"),
@@ -361,6 +367,21 @@
       `).join("");
     }
 
+    function formatFechaHumana(isoDate) {
+      if (!isoDate) return "";
+      const [y, m, d] = isoDate.split("-");
+      return y && m && d ? `${d}-${m}-${y}` : isoDate;
+    }
+
+    function openDatePicker() {
+      if (!els.fecha) return;
+      if (typeof els.fecha.showPicker === "function") {
+        try { els.fecha.showPicker(); return; } catch (_) {}
+      }
+      els.fecha.focus();
+      els.fecha.click();
+    }
+
     function clearForm() {
       els.tipo.value = "visita_habilitacion";
       els.search.value = "";
@@ -410,7 +431,7 @@ Región      : ${item.r}
 
 ── DETALLE ────────────────────────────
 Prioridad       : ${prioridad.toUpperCase()}
-Fecha requerida : ${els.fecha.value}
+Fecha requerida : ${formatFechaHumana(els.fecha.value)}
 Comentarios     : ${els.comentario.value.trim() || "(Sin comentarios adicionales)"}
 
 ───────────────────────────────────────
@@ -432,7 +453,7 @@ Sistema de Gestión · Operaciones Energía`;
           comuna: item.c,
           direccion: item.d,
           prioridad,
-          fecha_requerida: els.fecha.value,
+          fecha_requerida: formatFechaHumana(els.fecha.value),
           tipo: tipoLabel
         }
       };
@@ -468,11 +489,16 @@ Sistema de Gestión · Operaciones Energía`;
       }
     }
 
+    const today = new Date().toISOString().split("T")[0];
+    els.fecha.min = today;
+
     populateZones();
     populateActivos();
     renderLog();
     syncResumen();
 
+    els.abrirFecha.addEventListener("click", openDatePicker);
+    els.fecha.addEventListener("focus", openDatePicker);
     els.search.addEventListener("input", populateActivos);
     els.zona.addEventListener("change", populateActivos);
     els.activo.addEventListener("change", syncResumen);
