@@ -1,7 +1,7 @@
 {
-  "name": "operaciones-energia-formulario-lite",
+  "name": "operaciones-energia-formulario-completo",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "dependencies": {
     "nodemailer": "^6.9.16"

@@ -5,43 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Formulario Operaciones Energía</title>
   <style>
-    :root{--bg:#0b1020;--card:#11182d;--muted:#94a3b8;--line:#24304f;--text:#e5eefc;--accent:#facc15;--ok:#22c55e;--warn:#f59e0b;--bad:#ef4444;--blue:#3b82f6;}
-    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,#0b1020,#0f172a 45%,#111827);color:var(--text)}
-    .wrap{max-width:1180px;margin:0 auto;padding:28px 18px 60px}
-    .hero{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:18px;flex-wrap:wrap}
-    .badge{display:inline-block;padding:6px 10px;border:1px solid #3c4b72;border-radius:999px;font-size:12px;color:#fde68a;background:#1b2440}
-    h1{margin:8px 0 0;font-size:32px} .sub{color:var(--muted);margin-top:8px}
-    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px} @media (max-width:960px){.grid{grid-template-columns:1fr}}
-    .card{background:rgba(17,24,45,.95);border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
-    .section{padding:22px}
-    .title{font-size:18px;font-weight:800;margin:0 0 14px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px} @media (max-width:700px){.row{grid-template-columns:1fr}}
-    label{display:block;font-size:12px;color:#cbd5e1;margin-bottom:6px;font-weight:700}
-    input,select,textarea{width:100%;background:#0d152b;border:1px solid #2a3658;color:var(--text);border-radius:14px;padding:12px 14px;font-size:14px;outline:none}
-    input:focus,select:focus,textarea:focus{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(96,165,250,.15)}
-    textarea{min-height:120px;resize:vertical}
-    .type-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px} @media (max-width:700px){.type-grid{grid-template-columns:1fr}}
-    .type{padding:14px;border-radius:16px;border:1px solid #2a3658;background:#0d152b;cursor:pointer;transition:.15s}
-    .type.active{border-color:#facc15;background:#1a223b;transform:translateY(-1px)}
-    .type .top{display:flex;justify-content:space-between;align-items:center;font-weight:800;margin-bottom:6px}
-    .helper{font-size:12px;color:var(--muted);margin-top:8px}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    button{border:0;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer}
-    .btn-main{background:linear-gradient(135deg,#facc15,#f59e0b);color:#111827}
-    .btn-alt{background:#1d2946;color:#dbeafe;border:1px solid #31416b}
-    .status{padding:12px 14px;border-radius:14px;font-size:14px;margin-top:14px}
-    .ok{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.45);color:#bbf7d0}
-    .bad{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.45);color:#fecaca}
-    .pill{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:800}
-    .p-alta{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.35)}
-    .p-media{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.35)}
-    .p-baja{background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.35)}
-    .meta{display:grid;grid-template-columns:repeat(2,1fr);gap:10px} .meta > div{background:#0d152b;border:1px solid #273559;border-radius:14px;padding:12px} @media (max-width:700px){.meta{grid-template-columns:1fr}}
-    .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em} .v{font-size:14px;font-weight:700;margin-top:4px}
-    .log-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-    table{width:100%;border-collapse:collapse;font-size:13px} th,td{padding:11px 10px;border-top:1px solid #22304f;vertical-align:top;text-align:left} th{color:#93c5fd;font-size:12px}
-    .small{font-size:12px;color:var(--muted)} .count{background:#facc15;color:#111827;padding:2px 8px;border-radius:999px;font-weight:900}
-    .footer{margin-top:16px;color:#7c8fb3;font-size:12px;text-align:center}
+    :root {
+      --bg1:#07111f; --bg2:#0f172a; --card:#0f1b32; --card2:#111f3d; --line:#253557;
+      --text:#e8eefb; --muted:#94a3b8; --accent:#facc15; --accent2:#f59e0b; --ok:#22c55e; --bad:#ef4444;
+      --blue:#60a5fa; --pill:#1c2745;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; font-family:Inter,system-ui,Segoe UI,Arial,sans-serif; color:var(--text);
+      background: radial-gradient(circle at top left,#10234b 0,#08111f 32%,#0f172a 70%,#111827 100%);
+    }
+    .wrap { max-width:1220px; margin:0 auto; padding:26px 16px 48px; }
+    .hero { display:flex; justify-content:space-between; align-items:flex-start; gap:18px; margin-bottom:18px; flex-wrap:wrap; }
+    .badge { display:inline-flex; align-items:center; gap:8px; background:#162548; border:1px solid #314572; color:#fde68a; border-radius:999px; padding:7px 12px; font-size:12px; font-weight:700; }
+    h1 { margin:10px 0 6px; font-size:40px; line-height:1.02; }
+    .sub { color:var(--muted); max-width:680px; }
+    .hero-note { color:#cbd5e1; font-size:12px; text-align:right; }
+    .layout { display:grid; grid-template-columns:1.2fr .8fr; gap:18px; }
+    @media (max-width: 980px) { .layout { grid-template-columns:1fr; } h1 {font-size:32px;} }
+    .card {
+      background:linear-gradient(180deg,rgba(15,27,50,.96),rgba(12,21,39,.96));
+      border:1px solid var(--line); border-radius:24px; box-shadow:0 14px 40px rgba(0,0,0,.28);
+      overflow:hidden;
+    }
+    .section { padding:22px; }
+    .section-title { margin:0 0 16px; font-size:22px; font-weight:800; }
+    .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    @media (max-width:700px) { .row2 { grid-template-columns:1fr; } }
+    label { display:block; margin-bottom:7px; color:#cbd5e1; font-size:12px; font-weight:800; letter-spacing:.02em; }
+    input, select, textarea {
+      width:100%; border-radius:14px; border:1px solid #263a61; background:#0c1630; color:var(--text);
+      padding:13px 14px; font:inherit; outline:none;
+    }
+    input::placeholder, textarea::placeholder { color:#6f86a8; }
+    input:focus, select:focus, textarea:focus { border-color:#4c7bd9; box-shadow:0 0 0 3px rgba(76,123,217,.16); }
+    textarea { min-height:128px; resize:vertical; }
+    .help { color:#7f92b2; font-size:12px; margin-top:7px; }
+    .btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+    button {
+      border:0; border-radius:14px; padding:13px 18px; font:inherit; font-weight:800; cursor:pointer;
+      transition:transform .05s ease,opacity .2s ease;
+    }
+    button:active { transform:translateY(1px); }
+    .btn-primary { background:linear-gradient(180deg,#facc15,#eab308); color:#111827; }
+    .btn-secondary { background:#27324f; color:#e5eefc; }
+    .btn-primary:disabled,.btn-secondary:disabled { opacity:.55; cursor:not-allowed; }
+    .summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .sumbox {
+      border:1px solid #24385c; border-radius:16px; background:rgba(11,20,39,.75); padding:14px;
+      min-height:84px;
+    }
+    .sumbox .k { color:#8ea4c4; font-size:11px; font-weight:800; text-transform:uppercase; margin-bottom:8px; letter-spacing:.05em; }
+    .sumbox .v { color:#f8fafc; font-weight:700; line-height:1.35; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .pill {
+      padding:8px 11px; border-radius:999px; border:1px solid #28406a; background:var(--pill);
+      color:#dbe6fb; font-size:12px; font-weight:700;
+    }
+    .status {
+      margin-top:14px; padding:12px 14px; border-radius:14px; font-size:13px; border:1px solid transparent;
+    }
+    .ok { background:rgba(34,197,94,.10); border-color:rgba(34,197,94,.25); color:#bbf7d0; }
+    .err { background:rgba(239,68,68,.10); border-color:rgba(239,68,68,.25); color:#fecaca; }
+    .warn { background:rgba(245,158,11,.10); border-color:rgba(245,158,11,.25); color:#fde68a; }
+    .table-wrap { overflow:auto; border-top:1px solid var(--line); }
+    table { width:100%; border-collapse:collapse; min-width:860px; }
+    th,td { padding:12px 14px; border-bottom:1px solid rgba(37,53,87,.7); text-align:left; font-size:13px; }
+    th { color:#c7d2fe; background:rgba(10,18,34,.55); position:sticky; top:0; }
+    td { color:#dbe7fb; }
+    .right-note { color:#94a3b8; font-size:12px; }
+    .counter { display:inline-flex; align-items:center; justify-content:center; min-width:22px; padding:0 8px; height:22px; border-radius:999px; background:#facc15; color:#101827; font-size:12px; font-weight:900; }
+    .tiny { font-size:11px; color:#8ea4c4; }
   </style>
 </head>
 <body>
@@ -50,377 +84,400 @@
       <div>
         <div class="badge">⚡ OPERACIONES ENERGÍA</div>
         <h1>Formulario Público de Requerimientos</h1>
-        <div class="sub">Versión simple para Vercel: menos archivos, mismo flujo de envío a responsables.</div>
+        <div class="sub">Versión completa con base de activos cargada desde la distribución técnico-operacional. Seleccionas el activo y el sistema completa responsable, zona, área, comuna y dirección automáticamente.</div>
       </div>
-      <div class="small">Responsables cargados: <strong>Alfredo Vargas</strong> / <strong>Ariel Dominguez</strong></div>
+      <div class="hero-note">
+        Responsables cargados: <strong>Alfredo Vargas</strong> / <strong>Ariel Dominguez</strong><br/>
+        Copia automática: <strong>sfriedli@patio.cl</strong>
+      </div>
     </div>
 
-    <div class="grid">
-      <div class="card"><div class="section">
-        <h2 class="title">Nuevo requerimiento</h2>
-        <form id="reqForm">
-          <label>Tipo de requerimiento</label>
-          <div class="type-grid" id="tipos"></div>
+    <div class="layout">
+      <div class="card">
+        <div class="section">
+          <h2 class="section-title">Nuevo requerimiento</h2>
 
-          <div class="row" style="margin-top:14px">
+          <div class="row2">
             <div>
-              <label>Zona</label>
-              <select id="zonaFiltro">
+              <label for="tipo">Tipo de requerimiento</label>
+              <select id="tipo">
+                <option value="visita_habilitacion">Visita habilitación de cliente</option>
+                <option value="revision_tecnica">Revisión técnica</option>
+                <option value="revision_proyecto">Revisión proyecto eléctrico habilitación</option>
+                <option value="emergencia_electrica">Emergencia eléctrica</option>
+              </select>
+            </div>
+            <div>
+              <label for="search">Buscar activo o comuna</label>
+              <input id="search" placeholder="Ej: La Calera / Temuco / Lampa" />
+            </div>
+          </div>
+
+          <div class="row2" style="margin-top:12px">
+            <div>
+              <label for="zona">Zona</label>
+              <select id="zona">
                 <option value="">Todas</option>
-                <option>NORTE</option>
-                <option>CENTRO-NORTE</option>
-                <option>RM</option>
-                <option>CENTRO-SUR</option>
-                <option>SUR</option>
               </select>
             </div>
             <div>
-              <label>Buscar activo o comuna</label>
-              <input id="busqueda" placeholder="Ej: La Calera / Temuco / Lampa" />
+              <label for="activo">Activo</label>
+              <select id="activo">
+                <option value="">Selecciona un activo</option>
+              </select>
+              <div class="help">Al seleccionar un activo se completan automáticamente responsable, área, comuna y dirección.</div>
             </div>
           </div>
 
-          <div style="margin-top:14px">
-            <label>Activo</label>
-            <select id="activoSelect"><option value="">Selecciona un activo</option></select>
-            <div class="helper">Al seleccionar un activo se completan automáticamente responsable, área, comuna y dirección.</div>
-          </div>
-
-          <div class="row" style="margin-top:14px">
+          <div class="row2" style="margin-top:12px">
             <div>
-              <label>Prioridad</label>
+              <label for="prioridad">Prioridad</label>
               <select id="prioridad">
-                <option value="media">Media</option>
-                <option value="alta">Alta</option>
                 <option value="baja">Baja</option>
+                <option value="media" selected>Media</option>
+                <option value="alta">Alta</option>
               </select>
             </div>
             <div>
-              <label>Fecha requerida</label>
-              <input id="fecha" type="date" required />
+              <label for="fecha">Fecha requerida</label>
+              <input id="fecha" type="date" />
             </div>
           </div>
 
-          <div style="margin-top:14px">
-            <label>Comentarios / detalle</label>
+          <div style="margin-top:12px">
+            <label for="comentario">Comentarios / detalle</label>
             <textarea id="comentario" placeholder="Describe el requerimiento, observaciones y alcance solicitado."></textarea>
           </div>
 
           <div class="btns">
-            <button class="btn-main" type="submit" id="submitBtn">Enviar requerimiento</button>
-            <button class="btn-alt" type="button" id="resetBtn">Limpiar</button>
+            <button class="btn-primary" id="enviar">Enviar requerimiento</button>
+            <button class="btn-secondary" id="limpiar" type="button">Limpiar</button>
           </div>
-          <div id="status"></div>
-        </form>
-      </div></div>
 
-      <div class="card"><div class="section">
-        <h2 class="title">Resumen automático</h2>
-        <div class="meta">
-          <div><div class="k">Responsable</div><div class="v" id="rTecnico">—</div></div>
-          <div><div class="k">Correo destino</div><div class="v" id="rCorreo">—</div></div>
-          <div><div class="k">Zona</div><div class="v" id="rZona">—</div></div>
-          <div><div class="k">Área</div><div class="v" id="rArea">—</div></div>
-          <div><div class="k">Comuna</div><div class="v" id="rComuna">—</div></div>
-          <div><div class="k">Dirección</div><div class="v" id="rDireccion">—</div></div>
+          <div id="status"></div>
         </div>
-        <div class="helper" style="margin-top:12px">Copia automática a: <strong>sfriedli@patio.cl</strong></div>
-      </div></div>
+      </div>
+
+      <div class="card">
+        <div class="section">
+          <h2 class="section-title">Resumen automático</h2>
+          <div class="summary-grid">
+            <div class="sumbox"><div class="k">Responsable</div><div class="v" id="res-responsable">—</div></div>
+            <div class="sumbox"><div class="k">Correo destino</div><div class="v" id="res-email">—</div></div>
+            <div class="sumbox"><div class="k">Zona</div><div class="v" id="res-zona">—</div></div>
+            <div class="sumbox"><div class="k">Área</div><div class="v" id="res-area">—</div></div>
+            <div class="sumbox"><div class="k">Comuna</div><div class="v" id="res-comuna">—</div></div>
+            <div class="sumbox"><div class="k">Dirección</div><div class="v" id="res-direccion">—</div></div>
+          </div>
+          <div class="pill-row" id="stats"></div>
+          <div class="help" style="margin-top:16px">El formulario usa la base oficial cargada desde Excel para poblar el listado de activos y asignar responsable automáticamente.</div>
+        </div>
+      </div>
     </div>
 
-    <div class="card" style="margin-top:18px"><div class="section">
-      <div class="log-head">
-        <h2 class="title" style="margin:0">Registro local de envíos</h2>
-        <div class="small">Guardados en tu navegador <span class="count" id="count">0</span></div>
+    <div class="card" style="margin-top:18px">
+      <div class="section" style="padding-bottom:12px; display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap;">
+        <div>
+          <h2 class="section-title" style="margin-bottom:4px">Registro local de envíos</h2>
+          <div class="tiny">Se guarda en el navegador del usuario para trazabilidad rápida.</div>
+        </div>
+        <div class="right-note">Registros guardados: <span class="counter" id="reg-count">0</span></div>
       </div>
-      <div style="overflow:auto">
+      <div class="table-wrap">
         <table>
-          <thead><tr><th>Fecha</th><th>Activo</th><th>Tipo</th><th>Responsable</th><th>Prioridad</th><th>Estado</th></tr></thead>
-          <tbody id="tbody"></tbody>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Activo</th>
+              <th>Tipo</th>
+              <th>Responsable</th>
+              <th>Prioridad</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="log-body">
+            <tr><td colspan="6" class="tiny" style="padding:16px">Aún no hay registros guardados.</td></tr>
+          </tbody>
         </table>
       </div>
-    </div></div>
-
-    <div class="footer">Sistema de Gestión · Operaciones Energía · Deploy simple para GitHub + Vercel</div>
+    </div>
   </div>
 
   <script>
-    const TIPOS = [
-  { id:"visita_habilitacion",  label:"Visita Habilitación de Cliente",           icon:"🏠", color:"#3b82f6" },
-  { id:"revision_tecnica",     label:"Revisión Técnica",                         icon:"🔧", color:"#8b5cf6" },
-  { id:"revision_proyecto",    label:"Revisión Proyecto Eléctrico Habilitación", icon:"📐", color:"#f59e0b" },
-  { id:"emergencia_electrica", label:"Emergencia Eléctrica",                     icon:"⚡", color:"#ef4444" },
-];
-    const EMAILS = { "Alfredo Vargas":"avargas@patio.cl", "Ariel Dominguez":"adominguez@patio.cl" ;
-    const ACTIVOS = [
-  {a:"Korlaet Bonilla",       z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Huamachuco 8481",                       c:"Antofagasta"},
-  {a:"Korlaet Centro",        z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Jose Santos Ossa Nro 2440",             c:"Antofagasta"},
-  {a:"Korlaet Coviefi",       z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Manzana 43 Villa De La Independencia",  c:"Antofagasta"},
-  {a:"Korlaet Gran Via",      z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av Angamos 0159",                       c:"Antofagasta"},
-  {a:"Korlaet Lautaro",       z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av Carlos Oviedo Cavada 5319",          c:"Antofagasta"},
-  {a:"Korlaet Pampino",       z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Jose Santos Ossa Nro 2350",             c:"Antofagasta"},
-  {a:"Korlaet Torre",         z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Carlos Pezoa Veliz 34 Y Av Argentina",  c:"Antofagasta"},
-  {a:"Korlaet de la Plaza",   z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Ignacio Carrera Pinto 909",             c:"Antofagasta"},
-  {a:"Korlaet del Norte",     z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av Pedro Aguirre Cerda / Av Pac 8740",  c:"Antofagasta"},
-  {a:"Korlaet del Parque",    z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Huamachuco 8481-8485-8491",             c:"Antofagasta"},
-  {a:"La Chimba",             z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Pedro Aguirre Cerda # 11385",           c:"Antofagasta"},
-  {a:"La Negra",              z:"NORTE",        t:"Alfredo Vargas",  ar:"Industrial", d:"Ruta 5 Norte Mz N St 2 Sector Ind.",    c:"Antofagasta"},
-  {a:"Korlaet Calama I",      z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Granaderos 3180 Unimarc",           c:"Calama"},
-  {a:"Korlaet Calama II",     z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Aconcagua 2588",                        c:"Calama"},
-  {a:"Patio Manuel Rodriguez",z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Bartolomé Vivar Nº 1536-1580",          c:"Calama"},
-  {a:"Copiapo",               z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"La Hijuela #156",                       c:"Copiapó"},
-  {a:"Los Carrera",           z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Los Carrera",                           c:"Copiapó"},
-  {a:"PC I",                  z:"NORTE",        t:"Alfredo Vargas",  ar:"Industrial", d:"Panamericana Norte 811, Km 5",           c:"Copiapó"},
-  {a:"PC II",                 z:"NORTE",        t:"Alfredo Vargas",  ar:"Industrial", d:"Panamericana Norte 811, Km 5",           c:"Copiapó"},
-  {a:"La Cantera",            z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. La Cantera # 1915",                 c:"Coquimbo"},
-  {a:"Pan De Azúcar",         z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Alessandri #1117 Lote N°64",            c:"Coquimbo"},
-  {a:"Illapel",               z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Avda. Salvador Allende # 824",          c:"Illapel"},
-  {a:"Las Compañías",         z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Monjitas Oriente. 2706",                c:"La Serena"},
-  {a:"Outlet La Peñuelas",    z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Ruta 5 Norte, Regimiento Arica",        c:"La Serena"},
-  {a:"Mirador",               z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Benjamín Vicuña Mackenna # 890",    c:"Ovalle"},
-  {a:"Vicuña",                z:"NORTE",        t:"Alfredo Vargas",  ar:"Comercial",  d:"Calle Yungay 303",                      c:"Vicuña"},
-  {a:"Encon",                 z:"CENTRO-NORTE", t:"Alfredo Vargas",  ar:"Comercial",  d:"Encon # 500",                           c:"San Felipe"},
-  {a:"La Calera",             z:"CENTRO-NORTE", t:"Alfredo Vargas",  ar:"Comercial",  d:"Lautaro 78",                            c:"Calera"},
-  {a:"Con Con",               z:"CENTRO-NORTE", t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Manantiales # 1021",                c:"Con Con"},
-  {a:"Villa Alemana",         z:"CENTRO-NORTE", t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Valparaíso # 1871",                 c:"Villa Alemana"},
-  {a:"Centro de Dist. MK",    z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Camino Noviciado Norte S/N",            c:"Lampa"},
-  {a:"Centro de Dist. MK II", z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Avenida Las Condes 11400 of 64",        c:"Lampa"},
-  {a:"Pie Andino",            z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av Paseo Pie Andino 4850",              c:"Lo Barnechea"},
-  {a:"Berta Correa",          z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Santa Marta De Huechuraba # 7300",      c:"Huechuraba"},
-  {a:"CE I",                  z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Av. Santa Clara Nº 684",                c:"Huechuraba"},
-  {a:"Huechuraba",            z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Pedro Fontova # 7777-7789",         c:"Huechuraba"},
-  {a:"Outlet La Florida",     z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. La Florida 8988",                   c:"La Florida"},
-  {a:"Doña Elisa",            z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Av. Presidente Eduardo Frei M. 18800",  c:"Lampa"},
-  {a:"Valle Grande",          z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. La Montaña # 2528",                 c:"Lampa"},
-  {a:"Birmann",               z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Mariano Sanchez Fontecilla 310",        c:"Las Condes"},
-  {a:"Cerro Colorado",        z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Alonso De Córdova 4580",                c:"Las Condes"},
-  {a:"Nueva Las Condes",      z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Rosario Norte 660",                     c:"Las Condes"},
-  {a:"Outlet Maipú",          z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. Lo Espejo 943",                     c:"Maipú"},
-  {a:"Karmac",                z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Antillanca Sur 591 Lo Boza-Pudahuel",   c:"Pudahuel"},
-  {a:"Quilicura",             z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Av. O'Higgins # 358",                   c:"Quilicura"},
-  {a:"Santa Luisa",           z:"RM",           t:"Alfredo Vargas",  ar:"Comercial",  d:"Santa Luisa # 366",                     c:"Quilicura"},
-  {a:"Panal",                 z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Av Presidente Eduardo Frei M 550",      c:"Renca"},
-  {a:"Patio Miraflores",      z:"RM",           t:"Alfredo Vargas",  ar:"Industrial", d:"Avda. El Retiro 1201",                  c:"Renca"},
-  {a:"Teatinos",              z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Teatinos Nº254",                        c:"Santiago"},
-  {a:"Kennedy",               z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Av Presidente Kennedy 4700",            c:"Vitacura"},
-  {a:"Vitacura",              z:"RM",           t:"Alfredo Vargas",  ar:"Oficinas",   d:"Avenida Américo Vespucio Norte 1597",   c:"Vitacura"},
-  {a:"Angol Petrobras",       z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Calle General Bonilla 432",             c:"Angol"},
-  {a:"Padre Las Casas",       z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Maquehue # 1244",                   c:"Padre de las Casas"},
-  {a:"Barrio Inglés",         z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Las Encinas # 2690",                    c:"Temuco"},
-  {a:"Labranza",              z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Las Perdices # 547",                    c:"Temuco"},
-  {a:"Labranza 2",            z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Calle 1 Sur 070, Labranza",             c:"Temuco"},
-  {a:"Outlet La Temuco",      z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. De Los Poetas 249",                 c:"Temuco"},
-  {a:"Rudecindo Ortega",      z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Rudecindo Ortega # 1505",               c:"Temuco"},
-  {a:"Victoria",              z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Arturo Prat # 1490",                    c:"Victoria"},
-  {a:"Andalué",               z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. El Venado # 1380",                  c:"San Pedro de la Paz"},
-  {a:"San Pedro",             z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Portal San Pedro # 6950",           c:"San Pedro de la Paz"},
-  {a:"El Morro",              z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Perez Gacitua 279 Sector El Morro",     c:"Talcahuano"},
-  {a:"Talcahuano Industrial", z:"SUR",          t:"Ariel Dominguez", ar:"Industrial", d:"Avda. Gran Bretaña 5505",               c:"Talcahuano"},
-  {a:"Llanquihue",            z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Baquedano #612",                        c:"Llanquihue"},
-  {a:"Rahue",                 z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. República # 870",                   c:"Osorno"},
-  {a:"Alerce",                z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Calle Gabriela Mistral # 900",          c:"Puerto Montt"},
-  {a:"Los Notros",            z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Los Notros # 1280",                 c:"Puerto Montt"},
-  {a:"Torres del Puerto",     z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Antonio Varas # 216",                   c:"Puerto Montt"},
-  {a:"Puerto Varas",          z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Avenida Colón # 1500",                  c:"Puerto Varas"},
-  {a:"Mariquina",             z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"Calle Mariquina # 995",                 c:"San José de Mariquina"},
-  {a:"Patio Aldea",           z:"SUR",          t:"Ariel Dominguez", ar:"Comercial",  d:"General Urrutia 248",                   c:"Pucón"},
-  {a:"Chimbarongo",           z:"CENTRO-SUR",   t:"Ariel Dominguez", ar:"Comercial",  d:"García Reyes S/N",                      c:"Chimbarongo"},
-  {a:"Mall Rancagua",         z:"CENTRO-SUR",   t:"Ariel Dominguez", ar:"Comercial",  d:"Sargento Jose Bernardo, C. Cuevas 483", c:"Rancagua"},
-  {a:"Santa Cruz",            z:"CENTRO-SUR",   t:"Ariel Dominguez", ar:"Comercial",  d:"Plaza de armas 186",                    c:"Santa Cruz"},
-  {a:"Lo Martinez",           z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Lo Martinez # 645",                     c:"El Bosque"},
-  {a:"Camilo Henríquez",      z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Calle Camilo Henríquez # 1.042 A",      c:"La Florida"},
-  {a:"Colombia",              z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Colombia # 9187",                       c:"La Florida"},
-  {a:"Apoquindo",             z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Av. Apoquindo 4660",                    c:"Las Condes"},
-  {a:"Foster",                z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Av. Apoquindo Nº3469",                  c:"Las Condes"},
-  {a:"Satelite",              z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Alcalde Jose Luis Infante # 1320",  c:"Maipú"},
-  {a:"Simon Bolivar",         z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Alcalde Jose Luis Infante # 1320",  c:"Maipú"},
-  {a:"Peñalolén",             z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Consistorial # 2701",               c:"Peñalolén"},
-  {a:"Costanera I",           z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Av. Andres Bello 2299, Providencia",    c:"Providencia"},
-  {a:"Costanera II",          z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Suecia 0142, Providencia",              c:"Providencia"},
-  {a:"Torre Paris",           z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Av. Ricardo Lyon Nº 222, Providencia",  c:"Providencia"},
-  {a:"Ciudad del Este",       z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Diego Portales # 6303",             c:"Puente Alto"},
-  {a:"Ciudad del Sol",        z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Juan De Dios Malebrand # 1750",     c:"Puente Alto"},
-  {a:"El Salto",              z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. El Salto # 2506",                   c:"Recoleta"},
-  {a:"Eucaliptus",            z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Eucaliptus # 1273",                 c:"San Bernardo"},
-  {a:"Lo Blanco",             z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Padre Hurtado # 13310",                 c:"San Bernardo"},
-  {a:"Nos San Bernardo",      z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Los Morros / Santa Filomena",       c:"San Bernardo"},
-  {a:"Outlet La Fábrica",     z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av Carlos Valdovinos 200",              c:"San Joaquín"},
-  {a:"Sumar",                 z:"RM",           t:"Ariel Dominguez", ar:"Industrial", d:"Salomón Sumar 3600",                    c:"San Joaquín"},
-  {a:"Malaga",                z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Málaga 120, Las Condes",                c:"Santiago"},
-  {a:"Santiago Down",         z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av Libertador",                         c:"Santiago"},
-  {a:"Alonso",                z:"RM",           t:"Ariel Dominguez", ar:"Oficinas",   d:"Alonso De Cordova Nº 3788",             c:"Vitacura"},
-  {a:"Bustamante",            z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Manuel Antonio Matta # 060",        c:"Ñuñoa"},
-  {a:"Pedro de Valdivia",     z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Pedro De Valdivia # 3601",          c:"Ñuñoa"},
-  {a:"Tobalaba",              z:"RM",           t:"Ariel Dominguez", ar:"Comercial",  d:"Av. Tobalaba # 4507",                   c:"Ñuñoa"},
-  {a:"San Bernardo Ind.",     z:"RM",           t:"Ariel Dominguez", ar:"Industrial", d:"Santa Bernardita 12017",                c:"San Bernardo"},
-];
-    const CC = 'sfriedli@patio.cl';
-    const STORAGE_KEY = 'patio_req_simple_v1';
-    let selectedTipo = '';
-    let registros = [];
+    const EMAILS = {
+      "Alfredo Vargas": "avargas@patio.cl",
+      "Ariel Dominguez": "adominguez@patio.cl"
+    };
+
+    const TIPOS = {
+      visita_habilitacion: "Visita habilitación de cliente",
+      revision_tecnica: "Revisión técnica",
+      revision_proyecto: "Revisión proyecto eléctrico habilitación",
+      emergencia_electrica: "Emergencia eléctrica"
+    };
+
+    const ACTIVOS = [{"a":"Korlaet Bonilla","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Huamachuco 8481","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Centro","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Jose Santos Ossa Nro 2440","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Coviefi","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Manzana 43 Villa De La Independencia","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Gran Via","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av Angamos 0159","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Lautaro","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av Carlos Oviedo Cavada 5319","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Pampino","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Jose Santos Ossa Nro 2350","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Torre","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Carlos Pezoa Veliz 34 Y Av Argentina 33","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet de la Plaza","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Ignacio Carrera Pinto 909","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet del Norte","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av Pedro Aguirre Cerda / Av Pac 8700-8740 Mx B","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet del Parque","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Huamachuco 8481-8485-8491","c":"Antofagasta","r":"Antofagasta"},{"a":"La Chimba","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Pedro Aguirre Cerda # 11385","c":"Antofagasta","r":"Antofagasta"},{"a":"La Negra","z":"NORTE","t":"Alfredo Vargas","ar":"Industrial","d":"Ruta 5 Norte Mz N St 2 Sector Industrial La Negra, Antofagasta","c":"Antofagasta","r":"Antofagasta"},{"a":"Korlaet Calama I","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Granaderos 3180 Unimarc","c":"Calama","r":"Atacama"},{"a":"Korlaet Calama II","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Aconcagua 2588","c":"Calama","r":"Atacama"},{"a":"Patio Manuel Rodriguez","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Bartolomé Vivar Nº 1536-1580","c":"Calama","r":"Atacama"},{"a":"Copiapo","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"La Hijuela #156","c":"Copiapó","r":"Atacama"},{"a":"Coronel","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"La Hijuela #156","c":"Copiapó","r":"Atacama"},{"a":"Los Carrera","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Los Carrera","c":"Copiapó","r":"Atacama"},{"a":"PC I","z":"NORTE","t":"Alfredo Vargas","ar":"Industrial","d":"Panamericana Norte 811, Km 5 Copiapó, Chile.","c":"Copiapó","r":"Atacama"},{"a":"PC II","z":"NORTE","t":"Alfredo Vargas","ar":"Industrial","d":"Panamericana Norte 811, Km 5 Copiapó, Chile.","c":"Copiapó","r":"Atacama"},{"a":"Korlaet Calama","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Huamachuco 8481","c":"Calama","r":"Calama"},{"a":"La Cantera","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av. La Cantera # 1915","c":"Coquimbo","r":"Coquimbo"},{"a":"Pan De Azúcar","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Alessandri #1117  Lote N°64","c":"Coquimbo","r":"Coquimbo"},{"a":"Illapel","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Avda. Salvador Allende # 824","c":"Illapel","r":"Coquimbo"},{"a":"Las Compañías","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Monjitas Oriente. 2706","c":"La Serena","r":"Coquimbo"},{"a":"Outlet La Peñuelas","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Ruta 5 Norte, Esquina, Regimiento Arica, 1780000 Coquimbo, La Serena","c":"La Serena","r":"Coquimbo"},{"a":"Mirador","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Benjamín Vicuña Mackenna # 890","c":"Ovalle","r":"Coquimbo"},{"a":"Centro de DIstribución MK","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"CAMINO NOVICIADO NORTE S/N // CAM INT PERALILLO","c":"Lampa","r":"RM"},{"a":"Centro de DIstribución MK II","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"Avenida Las condes 11400 of 64","c":"Lampa","r":"RM"},{"a":"Pie Andino","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av Paseo Pie Andino 4850, Lo Barnechea","c":"Lo Barnechea","r":"RM"},{"a":"Berta Correa","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Santa Marta De Huechuraba # 7300","c":"Huechuraba","r":"RM"},{"a":"CE I","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Av. Santa Clara Nº 684, Ciudad Empresarial – Huechuraba","c":"Huechuraba","r":"RM"},{"a":"Huechuraba","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Pedro Fontova # 7777-7789","c":"Huechuraba","r":"RM"},{"a":"Outlet La Florida","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av. La Florida 8988, 8241429 La Florida, Región Metropolitana, Chile","c":"La Florida","r":"RM"},{"a":"Doña Elisa","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"Avenida Presidente Eduardo Frei Montalva 18800, Lampa, Chile, Lampa, Rm","c":"Lampa","r":"RM"},{"a":"Valle Grande","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av. La Montaña # 2528","c":"Lampa","r":"RM"},{"a":"Birmann","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Mariano Sanchez Fontecilla 310, Las Condes","c":"Las Condes","r":"RM"},{"a":"Cerro Colorado","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Alonso De Córdova 4580, Las Condes","c":"Las Condes","r":"RM"},{"a":"Nueva Las Condes","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Rosario Norte 660 - Las Condes","c":"Las Condes","r":"RM"},{"a":"Outlet Maipú","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Lo Espejo 943, Maipú, Región Metropolitana, Chile","c":"Maipú","r":"RM"},{"a":"Karmac","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"Antillanca Sur 591 Lo Boza-Pudahuel","c":"Pudahuel","r":"RM"},{"a":"Quilicura","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Av. O'Higgins # 358","c":"Quilicura","r":"RM"},{"a":"Santa Luisa","z":"RM","t":"Alfredo Vargas","ar":"Comercial","d":"Santa Luisa # 366","c":"Quilicura","r":"RM"},{"a":"Panal","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"Av Presidente Eduardo Frei M 550 Renca","c":"Renca","r":"RM"},{"a":"Patio Miraflores ex-Logicentro","z":"RM","t":"Alfredo Vargas","ar":"Industrial","d":"Avda. El Retiro 1201, Renca.","c":"Renca","r":"RM"},{"a":"Encon","z":"CENTRO-NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Encon # 500","c":"San Felipe","r":"Valparaíso"},{"a":"Teatinos","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Teatinos Nº254, Santiago","c":"Santiago","r":"RM"},{"a":"Kennedy","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Av Presidente Kennedy 4700, Vitacura, Región Metropolitana","c":"Vitacura","r":"RM"},{"a":"Vitacura","z":"RM","t":"Alfredo Vargas","ar":"Oficinas","d":"Avenida Américo Vespucio Norte 1597- Vitacura","c":"Vitacura","r":"RM"},{"a":"La Calera","z":"CENTRO-NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Lautaro 78   La Calera","c":"Calera","r":"Valparaíso"},{"a":"Con Con","z":"CENTRO-NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Manantiales # 1021","c":"Con Con","r":"Valparaíso"},{"a":"Villa Alemana","z":"CENTRO-NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"Av. Valparaíso # 1871","c":"Villa Alemana","r":"Valparaíso"},{"a":"Angol Petrobras","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Calle General Bonilla 432","c":"Angol","r":"Araucanía"},{"a":"Padre Las Casas","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Maquehue # 1244","c":"Padre de las Casas","r":"Araucanía"},{"a":"Barrio Inglés","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Las Encinas # 2690 / Los Conquistadores","c":"Temuco","r":"Araucanía"},{"a":"Labranza","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Las Perdices # 547","c":"Temuco","r":"Araucanía"},{"a":"Labranza 2","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Calle 1 Sur 070, Labranza","c":"Temuco","r":"Araucanía"},{"a":"Outlet La Temuco","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. De Los Poetas 249, Temuco, Araucanía","c":"Temuco","r":"Araucanía"},{"a":"Rudecindo Ortega","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Rudecindo Ortega # 1505","c":"Temuco","r":"Araucanía"},{"a":"Victoria","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Arturo Prat # 1490","c":"Victoria","r":"Araucanía"},{"a":"Andalué","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. El Venado  # 1380","c":"San Pedro de la Paz","r":"Biobío"},{"a":"San Pedro","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Portal San Pedro # 6950","c":"San Pedro de la Paz","r":"Biobío"},{"a":"El Morro","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Perez Gacitua 279 Sector El Morro","c":"Talcahuano","r":"Biobío"},{"a":"Talcahuano","z":"SUR","t":"Ariel Dominguez","ar":"Industrial","d":"Avda.Gran Bretaña 5505, Talcahuano","c":"Talcahuano","r":"Biobío"},{"a":"Llanquihue","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Baquedano #612","c":"Llanquihue","r":"Los Lagos"},{"a":"Rahue","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. República # 870","c":"Osorno","r":"Los Lagos"},{"a":"A. de Ercilla","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"None","c":"Puerto Montt","r":"Los Lagos"},{"a":"Alerce","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Calle Gabriela Mistral # 900","c":"Puerto Montt","r":"Los Lagos"},{"a":"Los Notros","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Los Notros # 1280","c":"Puerto Montt","r":"Los Lagos"},{"a":"Puerto Montt","z":"SUR","t":"Ariel Dominguez","ar":"Oficinas","d":"Bernardino 1981, Puerto Montt","c":"Puerto Montt","r":"Los Lagos"},{"a":"Puerto Montt","z":"SUR","t":"Ariel Dominguez","ar":"Industrial","d":"Bernardino 1981, Puerto Montt","c":"Puerto Montt","r":"Los Lagos"},{"a":"Torres del Puerto","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Antonio Varas # 216","c":"Puerto Montt","r":"Los Lagos"},{"a":"Puerto Varas","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Avenida Colón # 1500","c":"Puerto Varas","r":"Los Lagos"},{"a":"Mariquina","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Calle Mariquina # 995","c":"San José de Mariquina","r":"Los Ríos"},{"a":"Patio Aldea","z":"SUR","t":"Ariel Dominguez","ar":"Comercial","d":"General Urrutia 248","c":"Pucón","r":"Araucanía"},{"a":"Vicuña","z":"NORTE","t":"Alfredo Vargas","ar":"Comercial","d":"CALLE YUNGAY 303, VICUÑA","c":"Vicuña","r":"Coquimbo"},{"a":"Chimbarongo","z":"CENTRO-SUR","t":"Ariel Dominguez","ar":"Comercial","d":"García Reyes S/N","c":"Chimbarongo","r":"O'Higgins"},{"a":"Mall Rancagua","z":"CENTRO-SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Sargento Jose Bernardo, C. Cuevas 483, 2820639 Rancagua,","c":"Rancagua","r":"O'Higgins"},{"a":"Santa Cruz","z":"CENTRO-SUR","t":"Ariel Dominguez","ar":"Comercial","d":"Plaza de armas 186, Santa Cruz","c":"Santa Cruz","r":"O'Higgins"},{"a":"Lo Martinez","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Lo Martinez # 645","c":"El Bosque","r":"RM"},{"a":"Camilo Henríquez","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Calle Camilo Henríquez # 1.042 A","c":"La Florida","r":"RM"},{"a":"Colombia","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Colombia # 9187","c":"La Florida","r":"RM"},{"a":"Apoquindo","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Av. Apoquindo 4660, Las Condes, Región Metropolitana","c":"Las Condes","r":"RM"},{"a":"Foster","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Av. Apoquindo Nº3469 , Las Condes – Santiago","c":"Las Condes","r":"RM"},{"a":"Satelite","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Alcalde Jose Luis Infante # 1320","c":"Maipú","r":"RM"},{"a":"Simon Bolivar","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Alcalde Jose Luis Infante # 1320","c":"Maipú","r":"RM"},{"a":"Peñalolén","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Consistorial # 2701","c":"Peñalolén","r":"RM"},{"a":"Costanera I","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Av. Andres Bello 2299, Providencia, Santiago","c":"Providencia","r":"RM"},{"a":"Costanera II","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Suecia 0142, Providencia, Santiago","c":"Providencia","r":"RM"},{"a":"Torre Paris","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Av. Ricardo Lyon Nº 222, Providencia – Santiago","c":"Providencia","r":"RM"},{"a":"Ciudad del Este","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Diego Portales # 6303","c":"Puente Alto","r":"RM"},{"a":"Ciudad del Sol","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Juan De Dios Malebrand # 1750","c":"Puente Alto","r":"RM"},{"a":"El Salto'","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. El Salto # 2506","c":"Recoleta","r":"RM"},{"a":"Eucaliptus","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Eucaliptus # 1273","c":"San Bernardo","r":"RM"},{"a":"Lo Blanco","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Padre Hurtado # 13310","c":"San Bernardo","r":"RM"},{"a":"Nos San Bernardo","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Avenida Los Morros Con Calle Santa Filomena","c":"San Bernardo","r":"RM"},{"a":"Outlet La Fábrica","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av Carlos Valdovinos 200, San Joaquín,","c":"San Joaquin","r":"RM"},{"a":"Sumar","z":"RM","t":"Ariel Dominguez","ar":"Industrial","d":"Salomón Sumar 3600, San Joaquín","c":"San Joaquin","r":"RM"},{"a":"Malaga","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Málaga 120, Las Condes – Santiago","c":"Santiago","r":"RM"},{"a":"Santiago Down","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av Libertador","c":"Santiago","r":"RM"},{"a":"Alonso","z":"RM","t":"Ariel Dominguez","ar":"Oficinas","d":"Alonso De Cordova Nº 3788, Vitacura – Santiago","c":"Vitacura","r":"RM"},{"a":"Bustamante","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Manuel Antonio Matta # 060","c":"Ñuñoa","r":"RM"},{"a":"Pedro de Valdivia","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av. Pedro De Valdivia # 3601","c":"Ñuñoa","r":"RM"},{"a":"Tobalaba","z":"RM","t":"Ariel Dominguez","ar":"Comercial","d":"Av.Tobalaba # 4507","c":"Ñuñoa","r":"RM"},{"a":"San Bernardo","z":"RM","t":"Ariel Dominguez","ar":"Industrial","d":"Santa Bernardita 12017","c":"San Bernardo","r":"RM"}];
 
     const $ = (id) => document.getElementById(id);
     const els = {
-      tipos: $('tipos'), zonaFiltro: $('zonaFiltro'), busqueda: $('busqueda'), activoSelect: $('activoSelect'),
-      prioridad: $('prioridad'), fecha: $('fecha'), comentario: $('comentario'), status: $('status'),
-      rTecnico: $('rTecnico'), rCorreo: $('rCorreo'), rZona: $('rZona'), rArea: $('rArea'), rComuna: $('rComuna'), rDireccion: $('rDireccion'),
-      tbody: $('tbody'), count: $('count'), submitBtn: $('submitBtn'), reqForm: $('reqForm'), resetBtn: $('resetBtn')
+      tipo: $("tipo"),
+      search: $("search"),
+      zona: $("zona"),
+      activo: $("activo"),
+      prioridad: $("prioridad"),
+      fecha: $("fecha"),
+      comentario: $("comentario"),
+      enviar: $("enviar"),
+      limpiar: $("limpiar"),
+      status: $("status"),
+      resumen: {
+        responsable: $("res-responsable"),
+        email: $("res-email"),
+        zona: $("res-zona"),
+        area: $("res-area"),
+        comuna: $("res-comuna"),
+        direccion: $("res-direccion"),
+      },
+      stats: $("stats"),
+      logBody: $("log-body"),
+      regCount: $("reg-count"),
     };
 
-    function loadRegistros() {
-      try { registros = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { registros = []; }
-      renderTable();
+    const STORAGE_KEY = "patio_req_vercel_full_v1";
+
+    function uniqueSorted(list) {
+      return [...new Set(list.filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
     }
 
-    function saveRegistro(item) {
-      registros.unshift(item);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(registros));
-      renderTable();
-    }
-
-    function renderTipos() {
-      els.tipos.innerHTML = TIPOS.map(t => `
-        <button type="button" class="type ${selectedTipo === t.id ? 'active' : ''}" data-tipo="${t.id}">
-          <div class="top"><span>${t.icon} ${t.label}</span><span style="color:${t.color}">●</span></div>
-          <div class="small">Selecciona este flujo de atención.</div>
-        </button>`).join('');
-      els.tipos.querySelectorAll('[data-tipo]').forEach(btn => btn.onclick = () => { selectedTipo = btn.dataset.tipo; renderTipos(); });
-    }
-
-    function filteredActivos() {
-      const z = els.zonaFiltro.value.trim().toLowerCase();
-      const q = els.busqueda.value.trim().toLowerCase();
-      return ACTIVOS.filter(a => (!z || a.z.toLowerCase() === z) && (!q || a.a.toLowerCase().includes(q) || a.c.toLowerCase().includes(q)));
-    }
-
-    function renderActivos() {
-      const list = filteredActivos();
-      const current = els.activoSelect.value;
-      els.activoSelect.innerHTML = '<option value="">Selecciona un activo</option>' + list.map(a => `<option value="${a.a}">${a.a} · ${a.c} · ${a.t}</option>`).join('');
-      if (list.some(a => a.a === current)) els.activoSelect.value = current;
-      updateResumen();
-    }
-
-    function getActivoSel() {
-      return ACTIVOS.find(a => a.a === els.activoSelect.value) || null;
-    }
-
-    function updateResumen() {
-      const a = getActivoSel();
-      els.rTecnico.textContent = a?.t || '—';
-      els.rCorreo.textContent = a ? (EMAILS[a.t] || '—') : '—';
-      els.rZona.textContent = a?.z || '—';
-      els.rArea.textContent = a?.ar || '—';
-      els.rComuna.textContent = a?.c || '—';
-      els.rDireccion.textContent = a?.d || '—';
-    }
-
-    function prioridadClass(p) { return p === 'alta' ? 'p-alta' : p === 'baja' ? 'p-baja' : 'p-media'; }
     function fmtDate(iso) {
-      const d = new Date(iso); return d.toLocaleDateString('es-CL') + ' ' + d.toLocaleTimeString('es-CL', { hour:'2-digit', minute:'2-digit' });
+      try {
+        const d = new Date(iso);
+        return d.toLocaleString("es-CL", { dateStyle: "short", timeStyle: "short" });
+      } catch {
+        return iso || "";
+      }
     }
 
-    function renderTable() {
-      els.count.textContent = registros.length;
-      els.tbody.innerHTML = registros.length ? registros.map(r => `
+    function setStatus(kind, text) {
+      if (!text) {
+        els.status.innerHTML = "";
+        return;
+      }
+      els.status.innerHTML = `<div class="status ${kind}">${text}</div>`;
+    }
+
+    function getFilteredActivos() {
+      const q = els.search.value.trim().toLowerCase();
+      const z = els.zona.value;
+      return ACTIVOS.filter(item => {
+        const matchesZona = !z || item.z === z;
+        const haystack = `${item.a} ${item.c} ${item.d} ${item.t} ${item.ar}`.toLowerCase();
+        const matchesSearch = !q || haystack.includes(q);
+        return matchesZona && matchesSearch;
+      });
+    }
+
+    function populateZones() {
+      uniqueSorted(ACTIVOS.map(x => x.z)).forEach(z => {
+        const opt = document.createElement("option");
+        opt.value = z;
+        opt.textContent = z;
+        els.zona.appendChild(opt);
+      });
+    }
+
+    function populateActivos() {
+      const items = getFilteredActivos();
+      const selected = els.activo.value;
+      els.activo.innerHTML = '<option value="">Selecciona un activo</option>';
+      items.forEach(item => {
+        const opt = document.createElement("option");
+        opt.value = item.a;
+        opt.textContent = `${item.a} · ${item.c}`;
+        if (item.a === selected) opt.selected = true;
+        els.activo.appendChild(opt);
+      });
+      if (selected && !items.some(x => x.a === selected)) {
+        els.activo.value = "";
+      }
+      renderStats(items);
+      syncResumen();
+    }
+
+    function renderStats(items) {
+      const zonas = uniqueSorted(items.map(x => x.z)).length;
+      const areas = uniqueSorted(items.map(x => x.ar)).length;
+      const responsables = uniqueSorted(items.map(x => x.t)).length;
+      els.stats.innerHTML = `
+        <span class="pill">Activos visibles: <strong>${items.length}</strong></span>
+        <span class="pill">Zonas: <strong>${zonas}</strong></span>
+        <span class="pill">Áreas: <strong>${areas}</strong></span>
+        <span class="pill">Responsables: <strong>${responsables}</strong></span>
+      `;
+    }
+
+    function currentActivo() {
+      return ACTIVOS.find(x => x.a === els.activo.value) || null;
+    }
+
+    function syncResumen() {
+      const item = currentActivo();
+      els.resumen.responsable.textContent = item?.t || "—";
+      els.resumen.email.textContent = item ? (EMAILS[item.t] || "No definido") : "—";
+      els.resumen.zona.textContent = item?.z || "—";
+      els.resumen.area.textContent = item?.ar || "—";
+      els.resumen.comuna.textContent = item?.c || "—";
+      els.resumen.direccion.textContent = item?.d || "—";
+    }
+
+    function getLog() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveLog(records) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    }
+
+    function renderLog() {
+      const rows = getLog();
+      els.regCount.textContent = String(rows.length);
+      if (!rows.length) {
+        els.logBody.innerHTML = '<tr><td colspan="6" class="tiny" style="padding:16px">Aún no hay registros guardados.</td></tr>';
+        return;
+      }
+      els.logBody.innerHTML = rows.map(r => `
         <tr>
           <td>${fmtDate(r.fecha)}</td>
-          <td><strong>${r.activo}</strong><div class="small">${r.comuna || ''}</div></td>
+          <td>${r.activo}</td>
           <td>${r.tipo}</td>
-          <td>${r.tecnico}<div class="small">${r.emailEnviado || ''}</div></td>
-          <td><span class="pill ${prioridadClass(r.prioridad)}">${(r.prioridad || '').toUpperCase()}</span></td>
-          <td>${r.estado || 'guardado'}</td>
-        </tr>`).join('') : '<tr><td colspan="6" class="small">Aún no hay registros locales.</td></tr>';
+          <td>${r.tecnico}</td>
+          <td>${r.prioridad.toUpperCase()}</td>
+          <td>${r.estado}</td>
+        </tr>
+      `).join("");
     }
 
-    async function enviarCorreo(payload) {
-      const response = await fetch('/api/send-maintenance-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok || !data.ok) throw new Error(data.error || `HTTP ${response.status}`);
-      return data;
+    function clearForm() {
+      els.tipo.value = "visita_habilitacion";
+      els.search.value = "";
+      els.zona.value = "";
+      els.activo.value = "";
+      els.prioridad.value = "media";
+      els.fecha.value = "";
+      els.comentario.value = "";
+      setStatus("", "");
+      populateActivos();
+      syncResumen();
     }
 
-    function resetForm() {
-      selectedTipo = '';
-      els.reqForm.reset();
-      renderTipos();
-      renderActivos();
-      updateResumen();
-      els.status.innerHTML = '';
-    }
+    async function handleSubmit() {
+      const item = currentActivo();
+      if (!item) {
+        setStatus("warn", "Selecciona un activo válido antes de enviar.");
+        return;
+      }
+      if (!els.fecha.value) {
+        setStatus("warn", "Indica una fecha requerida.");
+        return;
+      }
+      const to = EMAILS[item.t];
+      if (!to) {
+        setStatus("err", `No hay correo configurado para ${item.t}.`);
+        return;
+      }
 
-    els.zonaFiltro.onchange = renderActivos;
-    els.busqueda.oninput = renderActivos;
-    els.activoSelect.onchange = updateResumen;
-    els.resetBtn.onclick = resetForm;
-
-    els.reqForm.onsubmit = async (e) => {
-      e.preventDefault();
-      const activo = getActivoSel();
-      const tipo = TIPOS.find(t => t.id === selectedTipo);
-      if (!tipo) return els.status.innerHTML = '<div class="status bad">Selecciona un tipo de requerimiento.</div>';
-      if (!activo) return els.status.innerHTML = '<div class="status bad">Selecciona un activo válido.</div>';
-      if (!els.fecha.value) return els.status.innerHTML = '<div class="status bad">Debes indicar la fecha requerida.</div>';
-
-      const to = EMAILS[activo.t] || '';
-      const subject = `[${els.prioridad.value.toUpperCase()}] ${tipo.label} — ${activo.a} (${activo.z})`;
-      const body = `Estimado/a ${activo.t},
+      const tipoLabel = TIPOS[els.tipo.value] || els.tipo.value;
+      const prioridad = els.prioridad.value;
+      const subject = `[${prioridad.toUpperCase()}] ${tipoLabel} — ${item.a} (${item.z})`;
+      const body = `Estimado/a ${item.t},
 
 Se ha generado un nuevo requerimiento en el Sistema de Gestión de Operaciones Energía que requiere su atención.
 
 ── TIPO DE REQUERIMIENTO ──────────────
-${tipo.label}
+${tipoLabel}
 
 ── DATOS DE LA INSTALACIÓN ────────────
-Activo      : ${activo.a}
-Área        : ${activo.ar}
-Zona        : ${activo.z}
-Dirección   : ${activo.d}
-Comuna      : ${activo.c}
+Activo      : ${item.a}
+Área        : ${item.ar}
+Zona        : ${item.z}
+Dirección   : ${item.d}
+Comuna      : ${item.c}
+Región      : ${item.r}
 
 ── DETALLE ────────────────────────────
-Prioridad       : ${els.prioridad.value.toUpperCase()}
+Prioridad       : ${prioridad.toUpperCase()}
 Fecha requerida : ${els.fecha.value}
-Comentarios     : ${els.comentario.value.trim() || '(Sin comentarios adicionales)'}
+Comentarios     : ${els.comentario.value.trim() || "(Sin comentarios adicionales)"}
 
 ───────────────────────────────────────
-${els.prioridad.value === 'alta' ? '⚠️ ATENCIÓN URGENTE REQUERIDA — EMERGENCIA ELÉCTRICA' : 'Favor coordinar atención a la brevedad posible.'}
+${prioridad === "alta" ? "⚠️ ATENCIÓN URGENTE REQUERIDA" : "Favor coordinar atención a la brevedad posible."}
 
 Saludos,
 Sistema de Gestión · Operaciones Energía`;
 
-      const registro = {
-        id: Date.now(), fecha: new Date().toISOString(), activo: activo.a, comuna: activo.c, tecnico: activo.t,
-        emailEnviado: to, tipo: tipo.label, prioridad: els.prioridad.value, estado: 'enviando'
+      const payload = {
+        to,
+        cc: "sfriedli@patio.cl",
+        subject,
+        body,
+        metadata: {
+          activo: item.a,
+          zona: item.z,
+          tecnico: item.t,
+          area: item.ar,
+          comuna: item.c,
+          direccion: item.d,
+          prioridad,
+          fecha_requerida: els.fecha.value,
+          tipo: tipoLabel
+        }
       };
-      els.submitBtn.disabled = true;
-      els.submitBtn.textContent = 'Enviando...';
-      els.status.innerHTML = '';
 
+      els.enviar.disabled = true;
+      setStatus("warn", "Enviando correo...");
+      let estado = "Enviado";
       try {
-        await enviarCorreo({ to, cc: CC, subject, body, metadata: { activo: activo.a, prioridad: els.prioridad.value, tecnico: activo.t } });
-        registro.estado = 'enviado';
-        saveRegistro(registro);
-        els.status.innerHTML = `<div class="status ok">Correo enviado correctamente a <strong>${to}</strong> con copia a <strong>${CC}</strong>.</div>`;
-        resetForm();
+        const res = await fetch("/api/send-maintenance-email", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data?.error || "No se pudo enviar el correo.");
+        setStatus("ok", `Correo enviado correctamente a ${to}.`);
       } catch (err) {
-        registro.estado = 'guardado con error';
-        registro.errorCorreo = err.message;
-        saveRegistro(registro);
-        els.status.innerHTML = `<div class="status bad">Se guardó el requerimiento, pero falló el correo: <strong>${err.message}</strong></div>`;
+        estado = "Error envío";
+        setStatus("err", `El requerimiento se guardó, pero el correo falló: ${err.message}`);
       } finally {
-        els.submitBtn.disabled = false;
-        els.submitBtn.textContent = 'Enviar requerimiento';
+        const log = getLog();
+        log.unshift({
+          fecha: new Date().toISOString(),
+          activo: item.a,
+          tipo: tipoLabel,
+          tecnico: item.t,
+          prioridad,
+          estado
+        });
+        saveLog(log);
+        renderLog();
+        els.enviar.disabled = false;
       }
-    };
+    }
 
-    renderTipos();
-    renderActivos();
-    loadRegistros();
+    populateZones();
+    populateActivos();
+    renderLog();
+    syncResumen();
+
+    els.search.addEventListener("input", populateActivos);
+    els.zona.addEventListener("change", populateActivos);
+    els.activo.addEventListener("change", syncResumen);
+    els.enviar.addEventListener("click", handleSubmit);
+    els.limpiar.addEventListener("click", clearForm);
   </script>
 </body>
 </html>
